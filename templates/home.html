@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>App</title>
-    <!--Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <!--Css-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
+    <!--Bootstrap para estilos de CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <!--Css Personalizado-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
 
-<body style="background: black;">
-    <div id = "Contenedor">
+  <body style="background: black">
+    <!--Div contenedor general-->
+    <div id="Contenedor">
+      <!--Elemento Canvas para mostrar graficos personalizados-->
+      <canvas
+        id="dibujo"
+        width="700"
+        height="500"
+        style="
+          cursor: crosshair;
+          border: 2px solid grey;
+          background: #d2d2ff;
+          margin-left: 50px;
+        "
+      ></canvas>
 
-    <canvas id="dibujo" width="700" height="500"
-        style="cursor:crosshair; border: 2px solid grey; background: #d2d2ff; margin-left: 50px;"></canvas>
+      <!--Elemento output utilizado para desplegar las coordenadas del cursor sobre el canvas-->
+      <div
+        id="output"
+        style="position: absolute; padding: 5px"
+        class="non-selectable"
+      ></div>
 
-    <div id="output" style="position:absolute; padding:5px;" class="non-selectable"></div>
-
-    <div id = "botones">
-        <button type="button" id="btn_avanzar" class="btn btn-outline-light" style="margin-top: 10px;">Avanzar</button>
+      <!--Div contenedor de los botones utilizados-->
+      <div id="botones">
+        <!--Elemento boton (contenido del atributo class asigna el tipo de boton de bootstrap)-->
+        <button
+          type="button"
+          id="btn_avanzar"
+          class="btn btn-outline-light"
+          style="margin-top: 10px"
+        >
+          Avanzar
+        </button>
+      </div>
     </div>
 
-    </div>
-
-     <!-- Scripts -->
-     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-</body>
-
+    <!-- Scripts-->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
 </html>
