@@ -6,9 +6,15 @@ window.cord_y = [];
 //Funcion encargada de dibujar un circulo en el canvas
 function dibujar_circulo(x, y, color) {
   ctx.beginPath();
-  ctx.arc(x, y, 10, 0, 2 * Math.PI);
+  ctx.arc(x, y, 7, 0, 2 * Math.PI);
+  ctx.fillStyle = "black";
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.arc(x, y, 5, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
+  ctx.closePath();
 }
 
 //Funcion encargada de obtener las coordenadas del mouse dentro del canvas
@@ -51,6 +57,7 @@ window.onload = function () {
   ctx = cv.getContext("2d");
   var output = document.getElementById("output");
   btn_avanzar = document.getElementById("btn_avanzar");
+  cnt_elementos = document.getElementById("cnt_elementos");
 
   //Funcion ejecutada al presionar el boton avanzar
   btn_avanzar.onclick = async function () {
@@ -58,7 +65,7 @@ window.onload = function () {
     console.log("Cordenadas:", window.cord_x, window.cord_y);
     //bucle para realizar avance del circulo dibujado
     i = 0;
-    while (i <= 100) {
+    while (i <= 20) {
       // Proceso de encoding para datos
       var datos = {
         cord_x: window.cord_x,
@@ -104,6 +111,7 @@ window.onload = function () {
       for (var j = 0; j < cord_x_resp.length; j++) {
         dibujar_circulo(cord_x_resp[j], cord_y_resp[j], "green");
      }
+      cnt_elementos.innerHTML ="Cantidad de elementos: " +cord_x_resp.length;
       
       //Se genera un delay de 200ms entre cada iteración
      // await delay(10);
