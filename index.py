@@ -26,7 +26,7 @@ def movimiento_brawmiano(x,y):
 
 def dividir():
     probabilidad = random.gauss(0,100)
-    if probabilidad >=50:
+    if probabilidad >=70:
         return True
     return False
 

@@ -1,7 +1,64 @@
 //Variables globales en JS(similar a un self de python)
 window.cord_x = [];
 window.cord_y = [];
+window.datos = [];
+window.etiquetas = [];
 
+
+
+
+///////grafica
+let miCanvas=document.getElementById("grafica").getContext("2d");
+
+    var chart = new Chart(miCanvas,{
+      type:"line",
+      data:{
+        labels:window.labels,
+        datasets:[
+          {
+            label:"Cantidad",
+            backgroundColor:"rgb(0,0,0)",
+            data:window.data
+          }
+        ]
+      },
+      options: {
+                responsive: false,
+                plugins: {
+                    title: {
+                      display: true,
+                      text: 'Crecimiento Bacteriano'
+                    }
+                  },
+                  scales: {
+                        /* xAxes: [{
+                          gridLines: {
+                            drawOnChartArea: false
+                          }
+                      }],
+                      YAxes: [{
+                        gridLines: {
+                          drawOnChartArea: false
+                        }
+                    }], */
+                    x:{
+                      grid:{display:false}
+                    },
+                    y:{
+                      grid:{drawBorder:false}
+                    },
+                    
+                  }
+            },
+      
+      
+    })
+
+    function updateChart(){
+      chart.data.datasets[0].data = window.datos;
+      chart.data.labels = window.etiquetas;
+      chart.update();
+    }
 /////////////////////////////////////////////Funciones del canvas////////////////////////////////////////////////////////////
 //Funcion encargada de dibujar un circulo en el canvas
 function dibujar_circulo(x, y, color) {
@@ -65,7 +122,7 @@ window.onload = function () {
     console.log("Cordenadas:", window.cord_x, window.cord_y);
     //bucle para realizar avance del circulo dibujado
     i = 0;
-    while (i <= 20) {
+    while (i <= 30) {
       // Proceso de encoding para datos
       var datos = {
         cord_x: window.cord_x,
@@ -112,9 +169,12 @@ window.onload = function () {
         dibujar_circulo(cord_x_resp[j], cord_y_resp[j], "green");
      }
       cnt_elementos.innerHTML ="Cantidad de elementos: " +cord_x_resp.length;
+      window.datos.push(cord_x_resp.length);
+      window.etiquetas.push(i.toString());
+      updateChart();
       
       //Se genera un delay de 200ms entre cada iteración
-     // await delay(10);
+     await delay(100);
     }
   };
 

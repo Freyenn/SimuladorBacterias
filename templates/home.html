@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
     <title>App</title>
     <!--Bootstrap para estilos de CSS-->
     <link
@@ -35,6 +36,19 @@
         "
       ></canvas>
 
+      <canvas
+        id="grafica"
+        width="400"
+        height="300"
+        style="
+          float: left;
+          border: 2px solid grey;
+          background: #ffffff;
+          "
+      ></canvas>
+
+
+
       <!--Elemento output utilizado para desplegar las coordenadas del cursor sobre el canvas-->
       <div
         id="output"
@@ -49,7 +63,9 @@
           type="button"
           id="btn_avanzar"
           class="btn btn-outline-light"
-          style="margin-top: 10px"
+          style="margin-top: 10px;
+          float: left;
+          "
         >
           Avanzar
         </button>
@@ -60,4 +76,5 @@
     <!-- Scripts-->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
+  
 </html>
