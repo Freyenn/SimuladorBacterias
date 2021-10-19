@@ -3,9 +3,14 @@ window.cord_x = [];
 window.cord_y = [];
 window.datos = [];
 window.etiquetas = [];
+window.repetir = "";
 
+const rango = document.querySelector("#customRange1")
+const texto = document.querySelector("#range_text")
 
-
+rango.oninput = () =>{
+  texto.innerHTML = ": "+rango.value+" s/tick"
+}
 
 ///////grafica
 let miCanvas=document.getElementById("grafica").getContext("2d");
@@ -74,33 +79,8 @@ function dibujar_circulo(x, y, color) {
   ctx.closePath();
 }
 
-//Funcion encargada de obtener las coordenadas del mouse dentro del canvas
-function oMousePos(canvas, evt) {
-  var ClientRect = canvas.getBoundingClientRect();
-  return {
-    //objeto
-    x: Math.round(evt.clientX - ClientRect.left),
-    y: Math.round(evt.clientY - ClientRect.top),
-  };
-}
 
-//Funcion encargada de marcar las coordenadas en un recuadro cerca del raton
-function marcarCoords(output, x, y) {
-  output.innerHTML = "x: " + x + ", y: " + y;
-  output.style.top = y + 20 + "px";
-  output.style.left = x + 20 + "px";
-  output.style.backgroundColor = "#FFF";
-  output.style.border = "1px solid #d9d9d9";
-}
 
-//Funcion encargada de limpiar las coordenadas en el recuadro cerca del raton
-function limpiarCoords(output) {
-  output.innerHTML = "";
-  output.style.top = 0 + "px";
-  output.style.left = 0 + "px";
-  output.style.backgroundColor = "transparent";
-  output.style.border = "none";
-}
 
 /////////////////////////////////////////////Finalizan Funciones del canvas////////////////////////////////////////////////////////////
 
@@ -114,15 +94,20 @@ window.onload = function () {
   ctx = cv.getContext("2d");
   var output = document.getElementById("output");
   btn_avanzar = document.getElementById("btn_avanzar");
+  btn_parar = document.getElementById("btn_parar");
   cnt_elementos = document.getElementById("cnt_elementos");
 
+  btn_parar.onclick = function(){
+    window.repetir=false;
+  }
   //Funcion ejecutada al presionar el boton avanzar
   btn_avanzar.onclick = async function () {
     //Se escribe en consola las coordenadas de todos los puntos dibujados
-    console.log("Cordenadas:", window.cord_x, window.cord_y);
+    //console.log("Cordenadas:", window.cord_x, window.cord_y);
     //bucle para realizar avance del circulo dibujado
+    window.repetir=true
     i = 0;
-    while (i <= 30) {
+    while (window.repetir==true) {
       // Proceso de encoding para datos
       var datos = {
         cord_x: window.cord_x,
@@ -174,7 +159,7 @@ window.onload = function () {
       updateChart();
       
       //Se genera un delay de 200ms entre cada iteración
-     await delay(100);
+     await delay(rango.value*1000);
     }
   };
 
@@ -191,14 +176,6 @@ window.onload = function () {
   };
 
   //Función responsiva al movimiento del raton sobre el canvas
-  cv.onmousemove = function (event) {
-    var mousePos = oMousePos(cv, event);
-    marcarCoords(output, mousePos.x, mousePos.y);
-  };
-
-  //Funcion responsiva al quitar el raton del canvas
-  cv.onmouseout = function (event) {
-    limpiarCoords(output);
-  };
+  
 };
 /////////////////////////////////////////////Termino Funciones onload/////////////////////////////////////////////////////////////////////////
