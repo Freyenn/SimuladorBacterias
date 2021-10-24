@@ -10,6 +10,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 BUZZ = 10
 
 def movimiento_brawmiano(x,y):
+    
     dx = random.gauss(0, BUZZ)
     dy = random.gauss(0, BUZZ)
     y = int(y)+dy
@@ -24,11 +25,31 @@ def movimiento_brawmiano(x,y):
         y = 440
     return x,y
 
-def dividir():
-    probabilidad = random.gauss(0,100)
-    if probabilidad >=70:
+def dividir(alimento):
+    
+    probabilidad = float(alimento)*50
+    rand = random.gauss(0,100)
+    #print("Rand:",rand,"Probabilidad:",probabilidad)
+    if rand <int(probabilidad) and rand >=0:
         return True
+
     return False
+
+def comer(sustrato,alimento):
+    sustrato = sustrato - 0.1
+    if sustrato <= 0:
+        sustrato = 0
+        alimento -= 0.1
+        return sustrato,alimento
+        
+    if alimento >=1:
+        alimento = 0
+    else:
+        alimento = alimento + 0.1
+    #print("Alimento:",alimento,"Sustrato:",sustrato)
+    return sustrato,alimento
+
+
 
 ##Enrutamiento de directorio raiz retorna pagina home
 @app.route('/', methods=['POST','GET'])
@@ -45,6 +66,8 @@ def respuesta():
         ##Se separa en los datos de interes
         cord_x = request_data.get('cord_x')
         cord_y = request_data.get('cord_y')
+        sustrato = request_data.get('sustrato')
+        alimento = request_data.get('alimento')
         
         ##Se imprime en consola de servido para verificar
         ##print("Cordenadas:",cord_x,cord_y)
@@ -52,11 +75,14 @@ def respuesta():
         cont=0
         for i in range(len(cord_y)+cont):
             cord_x[i],cord_y[i]=movimiento_brawmiano(cord_x[i],cord_y[i])
-            if dividir():
+            sustrato,alimento[i]=comer(sustrato,alimento[i])
+            if dividir(alimento[i]):
                 cord_x.append(cord_x[i]+10)
                 cord_y.append(cord_y[i])
+                alimento.append(0)
+                
     ##Retorno de la petición POST; se regresan coordenadas actualizadas en un JSON
-    return  jsonify({"cord_y":cord_y,"cord_x":cord_x})
+    return  jsonify({"cord_y":cord_y,"cord_x":cord_x,"sustrato":sustrato,"alimento":alimento})
 
 ##Incio del servidor
 if __name__ == '__main__':

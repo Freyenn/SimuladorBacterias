@@ -4,6 +4,8 @@ window.cord_y = [];
 window.datos = [];
 window.etiquetas = [];
 window.repetir = "";
+window.sustrato = 5000;
+window.alimento = [];
 
 const rango = document.querySelector("#customRange1")
 const texto = document.querySelector("#range_text")
@@ -112,6 +114,8 @@ window.onload = function () {
       var datos = {
         cord_x: window.cord_x,
         cord_y: window.cord_y,
+        sustrato: window.sustrato,
+        alimento: window.alimento
         
       };
 
@@ -139,10 +143,14 @@ window.onload = function () {
       //Se recuperan los valores para las coordenadas X & Y
       cord_x_resp = data.cord_x;
       cord_y_resp = data.cord_y;
+      sustrato_resp = data.sustrato;
+      alimento_resp = data.alimento;
 
       //Se actualizan los valores globales de coordenadas
       window.cord_x = cord_x_resp;
       window.cord_y = cord_y_resp;
+      window.sustrato = sustrato_resp;
+      window.alimento = alimento_resp;
 
       //Se imprimen en consola
       //console.log(cord_x_resp, cord_y_resp);
@@ -171,6 +179,7 @@ window.onload = function () {
 
     window.cord_x.push(x);
     window.cord_y.push(y);
+    window.alimento.push(0);
 
     dibujar_circulo(x, y, "green");
   };

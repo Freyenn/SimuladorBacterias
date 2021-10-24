@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo.css') }}" />
-  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+
   <title>Crecimiento Bacteriano</title>
   <link rel="icon" type="image/img" href="{{ url_for('static', filename='img/bacteria.png') }}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +38,7 @@
   </header>
 
   <!--Div contenedor general-->
-  <div class="simulacion">
+  <div class="simulacion non-selectable">
     <div id="Contenedor" class="graficos">
       <!--Div contenedor de los botones utilizados-->
       <div id="botones" class="parametros">
