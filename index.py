@@ -1,13 +1,7 @@
-from os import replace
-import re
+
 from flask import Flask, render_template,request,flash
 from flask.json import jsonify
-import random
-import sys
 
-from numpy.lib.function_base import append
-
-sys.path.insert(1, 'src/static/python')
 from bacteria import bacteria
 
 app = Flask(__name__)
