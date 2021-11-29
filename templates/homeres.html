@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/estilo.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+
   <title>Crecimiento Bacteriano</title>
   <link rel="icon" type="image/img" href="{{ url_for('static', filename='img/bacteria.png') }}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,86 +38,33 @@
   </header>
 
   <!--Div contenedor general-->
-  <div class="simulacion">
+  <div class="simulacion non-selectable">
     <div id="Contenedor" class="graficos">
       <!--Div contenedor de los botones utilizados-->
       <div id="botones" class="parametros">
-        <div>
-          <h2>Ingresa los parámetros de la simulación</h2>
+        <h3>Ingresa los parámetros de la simulación</h3>
+
+        <div class="entrada-tiempo">
+          <div>
+            <h4>Tiempo (s):</h4>
+          </div>
+          <div class="input-parametros"> <input type="number" name="tiempo" id="time"></div>
         </div>
-        <div class='parametros-division'>
-          <div class='bacteria'>
-            <div>
-              <h3>Propiedades de la bacteria</h3>
-            </div>
-            <div class="entrada-primera">
-              <div>
-                <h4> Tipo de Bacteria:</h4>
-              </div>
-              <div class="input-parametros">
-                <select name="bacterias-seleccion" id='opcion-bacteria'>
-                  <option>E. coli</option>
-                  <option>Estafilococo</option>
-                </select>
-              </div>
-            </div>
+        <div class="entrada-temp">
+          <div>
+            <h4>Temperatura (°C):</h4>
           </div>
-          <div class='medio-cultivo'>
-            <div>
-              <h3>Propiedades del Medio de Cultivo</h3>
-            </div>
-            <div class="entrada-primera">
-              <div>
-                <h4>Tipo de Medio:</h4>
-              </div>
-              <div class="input-parametros">
-                <select name="medios-seleccion" id='opcion-medio'>
-                  <option>Enriquecido</option>
-                  <option>General</option>
-                </select>
-              </div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>Volumen del medio (ml):</h4>
-              </div>
-              <div class="input-parametros"><input type="number" name="volumen-cultivo" id="volumen"></div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>pH:</h4>
-              </div>
-              <div class="input-parametros"><input type="number" name="ph-cultivo" id="ph"></div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>Temperatura (°C):</h4>
-              </div>
-              <div class="input-parametros"> <input type="number" name="temperatura" id="temp"></div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>Tipo de Antibiótico:</h4>
-              </div>
-              <div class="input-parametros">
-                <select name="antibioticos-seleccion" id='opcion-antibiotico'>
-                  <option>Antibiótico 1</option>
-                  <option>Antibiótico 2</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <div class="input-parametros"> <input type="number" name="temperatura" id="temp"></div>
         </div>
         <!-- Tiempo -->
         <div class="slider">
           <label>Velocidad de Simulación(S) </label>
           <label id="range_text">:</label>
-          <div id="cont_1">
-            <input type="range" min="0" max="5" step="0.1" value="0.1" id="customRange1" style="width: 300px;">
-          </div>
         </div>
-
-        <div class=botones-control>
+        <div id="cont_1">
+          <input type="range" min="0" max="5" step="0.1" value="0.1" id="customRange1" style="width: 300px;">
+        </div>
+        <div>
           <button type="button" id="btn_avanzar" class="btn btn-primary" style="margin-top: 10px;">
             Ejecutar
           </button>
@@ -123,9 +72,8 @@
             Parar
           </button>
         </div>
-
         <div class="curva">
-          <canvas id="grafica"
+          <canvas id="grafica" width="400" height="265"
             style="border: 2px solid rgb(85, 84, 116); background: #ffffff;">
           </canvas>
         </div>
@@ -137,8 +85,7 @@
         <h3>Con el mouse coloca las bacterias dentro
           del medio de cultivo.</h3>
 
-        <canvas id="dibujo" width="650" height="450"
-          style="
+        <canvas id="dibujo" width="650" height="450" style="
           cursor: crosshair;
           border: 2px solid rgb(85, 84, 116);
           background: #d1dde0;

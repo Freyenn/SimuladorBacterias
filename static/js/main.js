@@ -6,6 +6,10 @@ window.etiquetas = [];
 window.repetir = "";
 window.sustrato = 5000;
 window.alimento = [];
+window.contador_tick = [];
+window.temperatura = 25;
+window.primera_vez = [];
+window.dup_tick = [];
 
 const rango = document.querySelector("#customRange1")
 const texto = document.querySelector("#range_text")
@@ -70,12 +74,12 @@ let miCanvas=document.getElementById("grafica").getContext("2d");
 //Funcion encargada de dibujar un circulo en el canvas
 function dibujar_circulo(x, y, color) {
   ctx.beginPath();
-  ctx.arc(x, y, 7, 0, 2 * Math.PI);
+  ctx.arc(x, y, 3, 0, 2 * Math.PI);
   ctx.fillStyle = "black";
   ctx.fill();
   ctx.closePath();
   ctx.beginPath();
-  ctx.arc(x, y, 5, 0, 2 * Math.PI);
+  ctx.arc(x, y, 1, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
   ctx.closePath();
@@ -98,7 +102,7 @@ window.onload = function () {
   btn_avanzar = document.getElementById("btn_avanzar");
   btn_parar = document.getElementById("btn_parar");
   cnt_elementos = document.getElementById("cnt_elementos");
-
+  temp = document.getElementById("temp");
   btn_parar.onclick = function(){
     window.repetir=false;
   }
@@ -108,6 +112,9 @@ window.onload = function () {
     //console.log("Cordenadas:", window.cord_x, window.cord_y);
     //bucle para realizar avance del circulo dibujado
     window.repetir=true
+    window.temperatura = parseInt(temp.value)
+    if (window.temperatura >=48) { window.temperatura=0}
+    console.log(window.temperatura)
     i = 0;
     while (window.repetir==true) {
       // Proceso de encoding para datos
@@ -115,8 +122,11 @@ window.onload = function () {
         cord_x: window.cord_x,
         cord_y: window.cord_y,
         sustrato: window.sustrato,
-        alimento: window.alimento
-        
+        alimento: window.alimento,
+        contador_tick : window.contador_tick,
+        temperatura : window.temperatura,
+        primera_vez : window.primera_vez,
+        dup_tick : window.dup_tick
       };
 
       var init = {
@@ -145,12 +155,18 @@ window.onload = function () {
       cord_y_resp = data.cord_y;
       sustrato_resp = data.sustrato;
       alimento_resp = data.alimento;
+      primera_vez_resp = data.primera_vez;
+      dup_tick_resp = data.dup_tick;
+      contador_tick_resp = data.contador_tick;
 
       //Se actualizan los valores globales de coordenadas
       window.cord_x = cord_x_resp;
       window.cord_y = cord_y_resp;
       window.sustrato = sustrato_resp;
       window.alimento = alimento_resp;
+      window.primera_vez = primera_vez_resp;
+      window.dup_tick = dup_tick_resp;
+      window.contador_tick = contador_tick_resp;
 
       //Se imprimen en consola
       //console.log(cord_x_resp, cord_y_resp);
@@ -174,12 +190,18 @@ window.onload = function () {
   //Función responsiba al doble click sobre el canvas
   cv.ondblclick = function (event) {
     var rect = cv.getBoundingClientRect();
+    console.log("Rect.Left: "+rect.left,"Rect.TOP: "+rect.top)
+    console.log("event.clientX: "+event.clientX,"event.clientY: "+event.clientY)
     x = event.clientX - rect.left;
     y = event.clientY - rect.top;
+    console.log("X: "+x,"Y: "+y)
 
     window.cord_x.push(x);
     window.cord_y.push(y);
     window.alimento.push(0);
+    window.contador_tick.push(0);
+    window.primera_vez.push("True");
+    window.dup_tick.push(0);
 
     dibujar_circulo(x, y, "green");
   };
