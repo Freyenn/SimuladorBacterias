@@ -38,7 +38,7 @@ def respuesta():
         ##Se imprime en consola de servido para verificar
         ##print("Cordenadas:",cord_x,cord_y)
         
-        print("temperatura",temperatura)
+        #print("temperatura",temperatura)
         #Instanciación de bacterias
         list_bacterias = []
         estado = []
@@ -83,8 +83,8 @@ def respuesta():
                     dup_tick_temp.append(dup_tick[i])
                     contador_tick_temp.append(contador_tick[i])
 
-        print("Estado len",len(estado))
-        print("Estado temp len",len(estado_temp))
+        #print("Estado len",len(estado))
+        #print("Estado temp len",len(estado_temp))
         cord_x = cord_x_temp;cord_y=cord_y_temp;alimento=alimento_temp;estado=estado_temp;primera_vez=primera_vez_temp
         dup_tick = dup_tick_temp; contador_tick = contador_tick_temp
                            
