@@ -129,7 +129,7 @@ window.onload = function () {
     window.repetir = true
 
     window.temperatura = parseInt(temp.value)
-    window.sustrato = parseInt(volumen.value)
+    window.sustrato = parseInt((volumen.value))
     window.tiempo_ticks = parseInt(tiempo_ticks.value)
     
 

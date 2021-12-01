@@ -14,16 +14,16 @@ class bacteria():
         
 
         if self.primera_vez:
-                
                 self.dup_tick = self.calc_tDup(self.temperatura,tiempo_ticks)
                 self.primera_vez =  False
         
 
     def principal(self,sustrato,alimento):
+        self.Evaluar_vida(alimento)
+        x =self.x;y=self.y;sus = sustrato; ali = alimento;div=False
         if self.estado:
             x,y=self.movimiento_brawmiano()
             sus,ali=self.comer(sustrato,alimento)
-            
             div=self.dividir_time(alimento)
 
         return x,y,sus,ali,div,self.estado,self.primera_vez,self.dup_tick,self.contador_tick
@@ -58,29 +58,22 @@ class bacteria():
         cant_tick = round(tiempo_dup/tiempo_ticks) #10 minutos por tick
         return cant_tick
         
-
-    def dividir(self,alimento):
-        if alimento <-5 :
-            self.estado =False
-            return False
-        probabilidad = float(alimento)*50
-        rand = random.gauss(0,100)
-        #print("Rand:",rand,"Probabilidad:",probabilidad)
-        if rand <int(probabilidad) and rand >=0:
-            return True
-        return False
-
     def dividir_time(self,alimento):
         if alimento <= -.1:
-            
-            if alimento <= -5:
-                self.estado =False
-            return False
-        if self.dup_tick == self.contador_tick and self.estado:
-            self.contador_tick = 0
-            return True
+            pass
+        else:
+            if self.dup_tick == self.contador_tick and self.estado:
+                self.contador_tick = 0
+                return True
+
         self.contador_tick += 1
         return False
+
+    def Evaluar_vida(self,alimento):
+        if alimento <= -.1:
+            if alimento <= -5:
+                self.estado =False
+                
     
 
     def comer(self,sustrato,alimento):
