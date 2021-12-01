@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo.css') }}" />
-  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
   <title>Crecimiento Bacteriano</title>
   <link rel="icon" type="image/img" href="{{ url_for('static', filename='img/bacteria.png') }}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,188 +24,213 @@
       <a href="#info">Nosotros</a>
     </nav>
 
-    <section class="textos-header">
+    <section class="texto-header">
       <h1>Observa el crecimiento bacteriano con esta herramienta</h1>
-
     </section>
-    <div class='wave' style="height: 50px; overflow: hidden;">
-      <svg viewBox="0 0 500 80" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-        <path d="M0.00,49.98 C254.21,126.80 255.06,-3.45 500.00,49.98 L500.00,150.00 L-19.43,178.13 Z"
-          style="stroke: none; fill: rgb(138, 231, 228)"></path>
+    <div class='wave' style="height: 250px; overflow: hidden;">
+      <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+        <path d="M-26.24,81.42 C178.04,20.23 334.36,105.11 522.29,48.86 L502.54,-15.27 L0.00,0.00 Z">
+        </path>
       </svg>
     </div>
+
   </header>
-
-  <!--Div contenedor general-->
-  <div class="simulacion">
-    <div id="Contenedor" class="graficos">
-      <!--Div contenedor de los botones utilizados-->
-      <div id="botones" class="parametros">
-        <div>
-          <h2>Ingresa los parámetros de la simulación</h2>
+  <div class='caja-simulador'>
+    <div>
+      <div class="parametros">
+        <div class="titulo-parametros">
+          <h3>Parámetros de la simulación</h3>
         </div>
-        <div class='parametros-division'>
-          <div class='bacteria'>
-            <div>
-              <h3>Propiedades de la bacteria</h3>
-            </div>
-            <div class="entrada-primera">
-              <div>
+
+        <div class="bloques">
+          <div class="bloque1">
+            <div class="tipo-bacteria">
+              <div class="titulo-bacteria">
+                <h4>Propiedades de la bacteria</h4>
+              </div><br>
+              <div class="input-parametros">
                 <h4> Tipo de Bacteria:</h4>
-              </div>
-              <div class="input-parametros">
-                <select name="bacterias-seleccion" id='opcion-bacteria'>
-                  <option>E. coli</option>
-                  <option>Estafilococo</option>
+                <select class='opciones' id='opcion-bacteria' onchange="mostrar(this)">
+                  <option value="0">E. coli</option>
+                  <option value="1">Personalizado</option>
                 </select>
+              </div> <br>
+
+              <div id="hidden_div" style="display:none;">
+                <div class="titulo-bacteria">
+                  <h4>Tasa de crecimiento (&mu;) referente al:</h4>
+                </div><br>
+
+                <div>
+                  <div class="input-parametros">
+                    <h4>pH:</h4>
+                    <select class='opciones' id='opcion-ph' onchange="">
+                      <option value="1">Acidófilo</option>
+                      <option value="2">Neutrófilo</option>
+                      <option value="3">Alcalófilo</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="input-parametros">
+                    <h4>Temperatura:</h4>
+                    <select class='opciones' id='opcion-medio' onchange="">
+                      <option value="1">Psicrófilo</option>
+                      <option value="2">Mesofilo</option>
+                      <option value="3">Termofilo</option>
+                      <option value="4">Hipertermofilo</option>
+                    </select>
+                  </div>
+                </div><br>
               </div>
             </div>
           </div>
-          <div class='medio-cultivo'>
-            <div>
-              <h3>Propiedades del Medio de Cultivo</h3>
+
+          <div class="bloque2">
+            <div class="titulo-bacteria">
+              <h4>Propiedades del medio de cultivo</h4>
+            </div><br>
+
+            <div class="input-parametros">
+              <h4>Volumen del medio (ml):</h4>
+              <input class='entrada' type="number" id="volumen">
             </div>
-            <div class="entrada-primera">
-              <div>
-                <h4>Tipo de Medio:</h4>
-              </div>
-              <div class="input-parametros">
-                <select name="medios-seleccion" id='opcion-medio'>
-                  <option>Enriquecido</option>
-                  <option>General</option>
-                </select>
-              </div>
+
+            <div class="input-parametros">
+              <h4>Temperatura (°C):</h4>
+              <input class='entrada' type="number" id="temp-medio">
             </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>Volumen del medio (ml):</h4>
-              </div>
-              <div class="input-parametros"><input type="number" name="volumen-cultivo" id="volumen"></div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>pH:</h4>
-              </div>
-              <div class="input-parametros"><input type="number" name="ph-cultivo" id="ph"></div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>Temperatura (°C):</h4>
-              </div>
-              <div class="input-parametros"> <input type="number" name="temperatura" id="temp"></div>
-            </div>
-            <div class="entrada-restante">
-              <div>
-                <h4>Tipo de Antibiótico:</h4>
-              </div>
-              <div class="input-parametros">
-                <select name="antibioticos-seleccion" id='opcion-antibiotico'>
-                  <option>Antibiótico 1</option>
-                  <option>Antibiótico 2</option>
-                </select>
-              </div>
-            </div>
+
+            <div class="input-parametros">
+              <h4>Minutos por cada Tic:</h4>
+              <input class='entrada' type="number" id="minutos-tic">
+            </div><br>
           </div>
         </div>
-        <!-- Tiempo -->
-        <div class="slider">
-          <label>Velocidad de Simulación(S) </label>
-          <label id="range_text">:</label>
-          <div id="cont_1">
-            <input type="range" min="0" max="5" step="0.1" value="0.1" id="customRange1" style="width: 300px;">
-          </div>
-        </div>
-
-        <div class=botones-control>
-          <button type="button" id="btn_avanzar" class="btn btn-primary" style="margin-top: 10px;">
-            Ejecutar
-          </button>
-          <button type="button" id="btn_parar" class="btn btn-primary" style="margin-top: 10px;">
-            Parar
-          </button>
-        </div>
-
-        <div class="curva">
-          <canvas id="grafica"
-            style="border: 2px solid rgb(85, 84, 116); background: #ffffff;">
-          </canvas>
-        </div>
-
       </div>
 
-      <!--Elemento Canvas para mostrar graficos personalizados-->
-      <div class="caja-petri">
-        <h3>Con el mouse coloca las bacterias dentro
-          del medio de cultivo.</h3>
-
-        <canvas id="dibujo" width="650" height="450"
-          style="
-          cursor: crosshair;
-          border: 2px solid rgb(85, 84, 116);
-          background: #d1dde0;
-          margin-left: 10px;
-        "></canvas>
-        <div>
-          <b id="cnt_elementos" class="non-selectable">Cantidad de elementos: </b>
+      <div class="botones-control">
+        <div class="caja-slider">
+          <div class="tiempo-slider">
+            <h4>
+              Velocidad de Simulación(Tics)
+              <label id="range_text">:</label>
+            </h4>
+          </div>
+          <div id="cont_1">
+            <input class='slider' type="range" min="0" max="5" step="0.1" value="0.1" id="customRange1"
+              style="width: 300px;">
+          </div>
         </div>
+        <div class="botones">
+          <div id="mostrar-botones">
+            <div>
+              <button class="b_avanzar" type="button" id="btn_avanzar" onclick="parar();">
+                Ejecutar
+              </button>
+            </div>
+            <div>
+              <button class="b_parar" type="button" id="btn_parar" onclick="avanzar();" style="display: none;">
+                Parar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lienzo" >
+        <canvas id="grafica" style="
+                margin: auto;
+                width: 85%;
+                height: 300px;
+                background-color: whitesmoke;
+                text-align: center;
+                object-position:right;
+                 "></canvas>
+      </div>
+    </div>
+
+    <div class="medio-cultivo">
+      <div class="titulo-parametros">
+        <h4>Medio de cultivo</h4>
+      </div>
+
+      <div class=".non-selectable "> 
+        <h3>Da doble click con el mouse para colocar tus bacterias</h3>
+      </div>
+      <!--Elemento Canvas para mostrar graficos personalizados-->
+      <canvas id="dibujo" width="650" height="450" style="
+                        cursor: crosshair;
+                        border: 2px solid rgb(85, 84, 116);
+                        background: #d1dde0;
+                        margin-left: 10px;">
+      </canvas>
+      <div>
+        <b id="cnt_elementos" class="non-selectable">Cantidad de elementos: </b>
       </div>
 
     </div>
+
+
   </div>
 
   <div class="instrucciones" id="reglas">
-    <h2 class='titulo'>Parámetros del crecimiento bacteriano</h2>
-    <div>
-      <h3 class="subtitulo">La velocidad</h3>
-      <p>La velocidad específica de crecimiento es característica para cada
-        tipo de microorganismo y medio de cultivo (sustrato).
-      </p>
-      <h3 class="subtitulo">El tiempo</h3>
-      <p>
-        El tiempo de generación es el tiempo requerido para que, a partir
-        de una célula, se formen dos células, es decir, es el tiempo que
-        tarda una población microbiana en duplicarse. Este tiempo varía
-        considerablemente con los microorganismos y las condiciones ambientales
-        como la temperatura.
-      </p>
-      <h3 class="subtitulo">Temperatura de almacenamiento</h3>
-      <p>
-        La temperatura es uno de los parámetros ambientales
-        que condicionan el crecimiento y la supervivencia
-        de los microorganismos. Cada microorganismo tiene una
-        temperatura mínima, óptima y máxima de crecimiento. Cuanto
-        más distante de esa temperatura óptima sea la temperatura
-        de almacenamiento, menor será la velocidad de crecimiento.
-      </p>
-      <h3 class="subtitulo"> pH del alimento</h3>
-      <p>
-        El pH es otro de los parámetros ambientales más
-        importantes que condicionan el crecimiento y la supervivencia
-        de los microorganismos. Las diversas especies de bacterias presentan
-        también un pH máximo, un pH mínimo y un pH óptimo.
-      </p>
-      <h3 class="subtitulo">a<sub>w</sub> del alimento</h3>
-      <p>
-        La a<sub>w</sub> de un alimento es la relación entre la presión
-        de vapor de agua en el alimento y la presión de vapor del agua pura.
-      </p>
-
-      <div class="img1">
-        <img src="static/img/curva.png" alt="">
-      </div>
-
-      <div class="informacion" id="info">
-        <h3>Desarrollado por:</h3>
-        <p>
-          <li>Luis Efraín López García</li>
-          <li>Jesús Manuel Roa Escalante</li>
+    <div class="contenedor-texto">
+      <h2 class='titulo'>Parámetros del crecimiento bacteriano</h2>
+      <div>
+        <h3 class="subtitulo">La velocidad</h3>
+        <p>La velocidad específica de crecimiento es característica para cada
+          tipo de microorganismo y medio de cultivo (sustrato).
         </p>
-      </div>
+        <h3 class="subtitulo">El tiempo</h3>
+        <p>
+          El tiempo de generación es el tiempo requerido para que, a partir
+          de una célula, se formen dos células, es decir, es el tiempo que
+          tarda una población microbiana en duplicarse. Este tiempo varía
+          considerablemente con los microorganismos y las condiciones ambientales
+          como la temperatura.
+        </p>
+        <h3 class="subtitulo">Temperatura de almacenamiento</h3>
+        <p>
+          La temperatura es uno de los parámetros ambientales
+          que condicionan el crecimiento y la supervivencia
+          de los microorganismos. Cada microorganismo tiene una
+          temperatura mínima, óptima y máxima de crecimiento. Cuanto
+          más distante de esa temperatura óptima sea la temperatura
+          de almacenamiento, menor será la velocidad de crecimiento.
+        </p>
+        <h3 class="subtitulo"> pH del alimento</h3>
+        <p>
+          El pH es otro de los parámetros ambientales más
+          importantes que condicionan el crecimiento y la supervivencia
+          de los microorganismos. Las diversas especies de bacterias presentan
+          también un pH máximo, un pH mínimo y un pH óptimo.
+        </p>
+        <h3 class="subtitulo">a<sub>w</sub> del alimento</h3>
+        <p>
+          La a<sub>w</sub> de un alimento es la relación entre la presión
+          de vapor de agua en el alimento y la presión de vapor del agua pura.
+        </p>
 
+        <div class="img1">
+          <img src="static/img/curva.png" alt="">
+        </div>
+
+        <div class="informacion" id="info">
+          <h3>Desarrollado por:</h3>
+          <p>
+            <li>Luis Efraín López García</li>
+            <li>Jesús Manuel Roa Escalante</li>
+          </p>
+        </div><br>
+      </div>
     </div>
 
     <!-- Scripts-->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
 </body>
 
 </html>

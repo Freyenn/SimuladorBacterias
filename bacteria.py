@@ -3,7 +3,7 @@ import numpy as np
 from rbf import rbf 
 
 class bacteria():
-    def __init__(self,x,y,contador_tick=0,temperatura=25,primera_vez=True,dup_tick=0,estado=True):
+    def __init__(self,x,y,tiempo_ticks,contador_tick=0,temperatura=25,primera_vez=True,dup_tick=0,estado=True,):
         self.x=x
         self.y=y
         self.estado = estado
@@ -11,9 +11,11 @@ class bacteria():
         self.temperatura = int(temperatura)
         self.primera_vez = primera_vez
         self.dup_tick = int(dup_tick)
+        
 
         if self.primera_vez:
-                self.dup_tick = self.calc_tDup(self.temperatura)
+                
+                self.dup_tick = self.calc_tDup(self.temperatura,tiempo_ticks)
                 self.primera_vez =  False
         
 
@@ -44,14 +46,16 @@ class bacteria():
             self.y = 430
         return self.x,self.y
 
-    def calc_tDup(self,temperatura):
+    def calc_tDup(self,temperatura,tiempo_ticks):
         ##Obtener mu 
         temp = np.array(temperatura).reshape(1,-1)
         red = rbf(6)
         mu = red.evaluar(temp)[0,0]
         tiempo_dup = round((np.log(2)/mu)*60)
-        cant_tick = round(tiempo_dup/10) #10 minutos por tick
-
+        centro = tiempo_dup
+        sigma = centro*0.20
+        tiempo_dup =round(random.gauss(centro,sigma))
+        cant_tick = round(tiempo_dup/tiempo_ticks) #10 minutos por tick
         return cant_tick
         
 
@@ -67,8 +71,10 @@ class bacteria():
         return False
 
     def dividir_time(self,alimento):
-        if alimento < -5 :
-            self.estado =False
+        if alimento <= -.1:
+            
+            if alimento <= -5:
+                self.estado =False
             return False
         if self.dup_tick == self.contador_tick and self.estado:
             self.contador_tick = 0

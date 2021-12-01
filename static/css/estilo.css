@@ -8,168 +8,149 @@ body{
     display: flex;
     flex-direction: column;
     align-self: center;
-    background: rgb(138, 231, 228);
     font-family: 'Ubuntu', sans-serif;
-    
+    background-image:url(../img/fondosimulador.jpg);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.simulacion{
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    text-align: center;
+header{
+    width: 100%;
+    height: 100px;
+    position: relative;
 }
 
-.graficos{
+nav{
+    text-align: left;
+    padding: 10px 0 10px 0;
+}
+
+nav > a{
+    color: aliceblue;
+    font-weight: 200;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+nav > a:hover{
+    color: rgb(13, 32, 95);
+}
+
+.wave{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -100;
+}
+
+.wave svg path{
+    stroke: none; 
+    fill: rgba(74, 12, 144, 0.657)
+}
+
+header .texto-header{
+    padding: 10px 0 0 20px;
+    display: flex;
+    height: 20px;
+    width: 100%;
+}
+
+.texto-header h1{
+    font-size: 25px;
+    color:rgb(183, 255, 255);
+}
+
+/* caja simulador */
+
+.caja-simulador{
     justify-content: space-around;
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-
-.parametros{
-    align-self: flex-start;
     padding-left: 1rem;
-    width: 50%;
-    flex-direction: column;
-    text-align: center;
-}
-.non-selectable {
-    -moz-user-select: none; 
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
- }
-
-/* .caja-petri{
-    align-self: flex-start;
     padding-right: 1rem;
-    width: 50%;
-    flex-direction: column;
-    text-align: center;
-}
-
-#dibujo{
-    width: "650px";
-    height: "450px";
-    
-} */
-
-.parametros-division{
-    margin-top: 2%;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     
 }
 
-.bacteria{
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background-color:rgb(154, 185, 211);
-}
+/* parametros */
 
-.medio-cultivo{
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background-color: rgb(214, 210, 156);
-}
-
-.entrada-primera{
-    padding-top: 15px;
-    padding-bottom: 2px;
-    padding-right: 2%;
+.bloques{
     display: flex;
     flex-direction: row;
-    align-self: flex-end;  
 }
-.entrada-restante{
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-right: 2%;
+
+.bloque1{
+    width: 50%;
+    border-right: 3px double #02253F;
+}
+
+.caja-simulador .parametros{
+    margin: auto;
+    margin-top: 30px;
     display: flex;
-    flex-direction: row;
-    align-self: flex-end;  
+    flex-direction: column;
+    width: 550px;
+    height: fit-content;
+    background: linear-gradient(#8dd3c4, #8d8ed3);
+    border: 3px double #02253F;
 }
+
+.titulo-parametros{
+    padding: 4px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(#02253F, #176A95);
+}
+
+.titulo-bacteria{
+    padding: 4px;
+    text-align: center;
+    background: linear-gradient(#C2F9AA, #D6D1C9);
+}
+
 .input-parametros{
-    padding-left: 5px;
-    align-self: center;
+    margin: 2px;
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
 }
 
-#time{
-    text-align: center;
-    width: 50px;
-    height: 22px;
-    border-radius: 3px;
-}
-#temp{
-    text-align: center;
-    width: 50px;
-    height: 22px;
-    border-radius: 3px;
-}
-
-#volumen{
-    text-align: center;
-    width: 50px;
-    height: 22px;
-    border-radius: 3px;
-}
-
-#ph{
-    text-align: center;
-    width: 50px;
-    height: 22px;
-    border-radius: 3px;
-}
-
-#antibiotico{
-    text-align: center;
-    width: 50px;
-    height: 22px;
-    border-radius: 3px;
-}
-
-#opcion-medio{
-    text-align: center;
-    height: 22px;
+.opciones{
     border-radius: 3px;
     font-family: 'Ubuntu', sans-serif;
 }
 
-#opcion-bacteria{
-    text-align: center;
-    height: 22px;
-    border-radius: 3px;
-    font-family: 'Ubuntu', sans-serif;
-}
-#opcion-antibiotico{
-    text-align: center;
-    height: 22px;
-    border-radius: 3px;
-    font-family: 'Ubuntu', sans-serif;
-}
-.curva{
-    padding-top: 1rem;
-}
-#grafica{
-    width: 80%;
+.bloque2{
+    width: 50%;
 }
 
-.slider{
-    padding-top: 1rem;
+.entrada{
     text-align: center;
+    width: 50px;
+    height: 22px;
+    border-radius: 3px;
 }
 
 .botones-control{
-    text-align: center;
+    margin: 5px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.botones{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    
+}
+
+#mostrar-botones{
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 #btn_avanzar{
@@ -180,11 +161,9 @@ body{
     font-style: bold;
     text-transform: uppercase;
     font-weight: 700;
-    background-color: rgb(57, 180, 57);
+    background: linear-gradient(#167013, #3d8a25);
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    display: inline-block;
-    align-self: center;
 }
 
 #btn_parar{
@@ -195,21 +174,79 @@ body{
     font-style: bold;
     text-transform: uppercase;
     font-weight: 700;
-    background-color: rgb(216, 34, 34);
+    background: linear-gradient(#9b2525, #e62626);
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    display: inline-block;
-    align-self: center;
 }
+
+/* propiedades slider */
+.caja-slider{
+    text-align: center;
+}
+
+.tiempo-slider{
+    margin: 6px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #ffffff;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+  
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #36115f;
+    cursor: pointer;
+}
+
+.lienzo{
+    margin: auto;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* medio de cultivo */
+
+.medio-cultivo{
+    margin-top: 30px;
+    justify-content: flex-end;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* informacion de la pagina */
 
 .instrucciones{
     margin: auto;
     display: flex;
     flex-direction: column;
     width: 70%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
+
+.contenedor-texto{
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 3px double rgb(27, 27, 82);
+    border-radius: 3rem;
+    background: linear-gradient(#39ccd1b9, #228eccbe);
+}
+
 .titulo{
     color: #000000;
     font-size: 25px;
@@ -233,50 +270,3 @@ p{
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
-/*header*/
-
-header{
-    width: 100%;
-    height: 120px;
-    background: #00467F;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #A5CC82, #00467F);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #a5cc82b7, #00467fbb), url(../img/fondo.png); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-}
-
-nav{
-    text-align: left;
-    padding: 10px 0 10px 0;
-}
-
-nav > a{
-    color: aliceblue;
-    font-weight: 200;
-    text-decoration: none;
-    margin-left: 20px;
-}
-
-nav > a:hover{
-    color: rgb(13, 32, 95);
-}
-
-.wave{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-header .textos-header{
-    padding: 10px 0 0 20px;
-    display: flex;
-    height: 20px;
-    width: 100%;
-}
-
-.textos-header h1{
-    font-size: 25px;
-    color:ghostwhite;
-}
-

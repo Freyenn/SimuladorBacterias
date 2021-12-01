@@ -30,6 +30,8 @@ def respuesta():
         temperatura = request_data.get('temperatura')
         primera_vez = request_data.get('primera_vez')
         dup_tick = request_data.get('dup_tick')
+        tiempo_ticks =request_data.get('tiempo_ticks')
+        
         ##Se imprime en consola de servido para verificar
         ##print("Cordenadas:",cord_x,cord_y)
         
@@ -38,7 +40,7 @@ def respuesta():
         list_bacterias = []
         estado = []
         for i in range(len(cord_y)):
-            list_bacterias.append(bacteria(cord_x[i],cord_y[i],contador_tick[i],temperatura,primera_vez[i],dup_tick[i]))
+            list_bacterias.append(bacteria(cord_x[i],cord_y[i],tiempo_ticks,contador_tick[i],temperatura,primera_vez[i],dup_tick[i]))
             
 
         ##Comportamiento para cada bacteria en cada TICK

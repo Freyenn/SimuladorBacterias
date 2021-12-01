@@ -7,52 +7,100 @@
 body{
     display: flex;
     flex-direction: column;
+    align-self: center;
     background: rgb(138, 231, 228);
-
     font-family: 'Ubuntu', sans-serif;
     
 }
 
 .simulacion{
-    margin: auto;
-    display: flex;
-    flex-direction: column;
     padding-top: 1rem;
     padding-bottom: 2rem;
+    text-align: center;
 }
 
 .graficos{
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end; 
+    justify-content: space-around;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
+
 
 .parametros{
-    margin: auto;
-    display: flex;
-    flex-direction: column;
+    align-self: flex-start;
     padding-left: 1rem;
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
+}
+.non-selectable {
+    -moz-user-select: none; 
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+ }
+
+/* .caja-petri{
+    align-self: flex-start;
     padding-right: 1rem;
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
 }
 
-.entrada-tiempo{
+#dibujo{
+    width: "650px";
+    height: "450px";
+    
+} */
+
+.parametros-division{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.bacteria{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color:rgb(154, 185, 211);
+}
+
+.medio-cultivo{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: rgb(214, 210, 156);
+}
+
+.entrada-primera{
     padding-top: 15px;
     padding-bottom: 2px;
+    padding-right: 2%;
     display: flex;
     flex-direction: row;
-    align-self: center;  
+    align-self: flex-end;  
 }
-.entrada-temp{
+.entrada-restante{
     padding-top: 2px;
     padding-bottom: 2px;
+    padding-right: 2%;
     display: flex;
     flex-direction: row;
-    align-self: center;  
+    align-self: flex-end;  
 }
 .input-parametros{
     padding-left: 5px;
+    align-self: center;
 }
 
 #time{
@@ -68,13 +116,62 @@ body{
     border-radius: 3px;
 }
 
+#volumen{
+    text-align: center;
+    width: 50px;
+    height: 22px;
+    border-radius: 3px;
+}
+
+#ph{
+    text-align: center;
+    width: 50px;
+    height: 22px;
+    border-radius: 3px;
+}
+
+#antibiotico{
+    text-align: center;
+    width: 50px;
+    height: 22px;
+    border-radius: 3px;
+}
+
+#opcion-medio{
+    text-align: center;
+    height: 22px;
+    border-radius: 3px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#opcion-bacteria{
+    text-align: center;
+    height: 22px;
+    border-radius: 3px;
+    font-family: 'Ubuntu', sans-serif;
+}
+#opcion-antibiotico{
+    text-align: center;
+    height: 22px;
+    border-radius: 3px;
+    font-family: 'Ubuntu', sans-serif;
+}
 .curva{
     padding-top: 1rem;
 }
+#grafica{
+    width: 80%;
+}
 
 .slider{
-    padding-top: 2px;
+    padding-top: 1rem;
+    text-align: center;
 }
+
+.botones-control{
+    text-align: center;
+}
+
 #btn_avanzar{
     text-decoration: none;
     color: white;
@@ -87,7 +184,6 @@ body{
     padding: 0.5rem 1rem;
     border-radius: 10px;
     display: inline-block;
-
     align-self: center;
 }
 
@@ -103,7 +199,6 @@ body{
     padding: 0.5rem 1rem;
     border-radius: 10px;
     display: inline-block;
-
     align-self: center;
 }
 
@@ -111,7 +206,7 @@ body{
     margin: auto;
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 70%;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
