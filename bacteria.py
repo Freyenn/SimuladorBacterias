@@ -12,18 +12,19 @@ class bacteria():
         self.primera_vez = primera_vez
         self.dup_tick = int(dup_tick)
         
+        
 
         if self.primera_vez:
                 self.dup_tick = self.calc_tDup(self.temperatura,tiempo_ticks)
                 self.primera_vez =  False
         
 
-    def principal(self,sustrato,alimento):
+    def principal(self,sustrato,alimento,tiempo_ticks):
         self.Evaluar_vida(alimento)
         x =self.x;y=self.y;sus = sustrato; ali = alimento;div=False
         if self.estado:
             x,y=self.movimiento_brawmiano()
-            sus,ali=self.comer(sustrato,alimento)
+            sus,ali=self.comer(sustrato,alimento,tiempo_ticks)
             div=self.dividir_time(alimento)
 
         return x,y,sus,ali,div,self.estado,self.primera_vez,self.dup_tick,self.contador_tick
@@ -56,10 +57,12 @@ class bacteria():
         sigma = centro*0.20
         tiempo_dup =round(random.gauss(centro,sigma))
         cant_tick = round(tiempo_dup/tiempo_ticks) #10 minutos por tick
+        if cant_tick < 1 :
+            cant_tick = 1
         return cant_tick
         
     def dividir_time(self,alimento):
-        if alimento <= -.1:
+        if alimento <= -.01:
             pass
         else:
             if self.dup_tick == self.contador_tick and self.estado:
@@ -72,20 +75,23 @@ class bacteria():
     def Evaluar_vida(self,alimento):
         if alimento <= -.1:
             if alimento <= -5:
-                self.estado =False
+                rand = random.gauss(0,100)
+                #print("Rand:",rand,"Probabilidad:",probabilidad)
+                if rand <=int(20) and rand >=0:
+                    self.estado =False
                 
     
 
-    def comer(self,sustrato,alimento):
-        sustrato = sustrato - 0.1
+    def comer(self,sustrato,alimento,tiempo_ticks):
+        sustrato = sustrato - 0.01*tiempo_ticks
         if sustrato <= 0:
             sustrato = 0
-            alimento -= 0.1
+            alimento -= 0.01*tiempo_ticks
             return sustrato,alimento
             
         if alimento >=1:
             alimento = 0
         else:
-            alimento = alimento + 0.1
+            alimento = alimento + 0.01*tiempo_ticks
         #print("Alimento:",alimento,"Sustrato:",sustrato)
         return sustrato,alimento

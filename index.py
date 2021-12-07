@@ -47,7 +47,7 @@ def respuesta():
         #print("Cantidad de bacterias",len(list_bacterias))
         
         for i in range(len(list_bacterias)):
-            cord_x[i],cord_y[i],sustrato,alimento[i],divid,est,primera_vez[i],dup_tick[i],contador_tick[i]=list_bacterias[i].principal(sustrato,alimento[i])
+            cord_x[i],cord_y[i],sustrato,alimento[i],divid,est,primera_vez[i],dup_tick[i],contador_tick[i]=list_bacterias[i].principal(sustrato,alimento[i],tiempo_ticks)
             #cord_x[i],cord_y[i],sustrato,alimento[i]=list_bacterias[i].movimiento_brawmiano()
             #sustrato,alimento[i]=list_bacterias[i].comer(sustrato,alimento[i])
             estado.append(est)
