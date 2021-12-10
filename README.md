@@ -16,4 +16,19 @@ El archivo HTML principal se encuentra en */templates/home.html* dentro de este 
 
 Por ultimo en la raíz del repositorio se encuentra el archivo -*bacteia.py* el cual corresponde a la entidad agente que se utiliza para realizar la simulación, esta contiene todas las rutinas que realiza la bacteria para moverse, comer, dividirse y morir.
 
-# Archivos
+## Propiedades del Agente
+
+| Nombre | Descripción | Tipo de dato |
+| ------------- | ------------- |------------- |
+| Self.X | Valor en posición X | Entero |
+| Self.Y | Valor en posición Y | Entero |
+| Self.Estado | Estado de vida | Booleano |
+| Self.EstadoDiv | Bandera para realizar división | Booleano |
+
+## Memoria del Agente
+
+| Nombre | Descripción | Tipo de dato |
+| ------------- | ------------- |------------- |
+| Self.dupTick | Ticks necesarios para dividirse | Entero |
+| Self.contadorTick | Conteo de ticks | Entero |
+| Self.Alimento | Cantidad de alimento ingerido | Flotante |
